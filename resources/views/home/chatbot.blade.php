@@ -20,6 +20,8 @@
     </button>
   </div>
 
+  
+
   <!-- FAQ Chat Content -->
   <div class="chat-container overflow-y-auto p-4 flex-1" id="chat-container">
     <!-- Welcome Message -->
@@ -35,13 +37,17 @@
     <!-- FAQ Buttons -->
     <div class="message-animation mb-4">
       <div class="flex flex-wrap gap-2 ml-10">
+        <button><a href="{{ route('register') }}" class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">
+          Want to make an account?
+        </a></button>
+                <button><a href="{{ route('login') }}" class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">
+          login account?
+        </a></button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">What's check-in time?</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">What's check-out time?</button>
-        <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">Nearby restaurants</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">Extend my stay</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">House rules</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">Wifi information</button>
-        <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">Pet policy</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">Parking information</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">Cancellation policy</button>
         <button class="quick-question bg-gray-200 hover:bg-gray-300 text-gray-800 text-xs px-3 py-1 rounded-full transition">How to contact host</button>
@@ -78,10 +84,9 @@
         "extend my stay": "📅 To extend your stay, please request through your booking page or contact our support.",
         "house rules": "🏠 Common house rules:<br>• No smoking<br>• No parties/events<br>• Quiet hours: 10PM - 8AM",
         "wifi information": "📶 Wifi name and password are available in your booking confirmation or at check-in.",
-        "pet policy": "🐾 Pets are generally not allowed unless specifically mentioned in the listing.",
         "parking information": "🚗 Free onsite parking is available. Details are provided before check-in.",
         "cancellation policy": "📝 Free cancellation within 48 hours after booking. Conditions apply after that.",
-        "how to contact host": "📩 You can message your host directly through the Escapadia platform anytime!"
+        "how to contact host": "📩 You can message your host directly through the Escapadia"
       };
     
       // Function to add message
@@ -103,7 +108,7 @@
             <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center mr-2 flex-shrink-0">
               <i class="fas fa-robot text-rose-500 text-sm"></i>
             </div>
-            <div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+            <div class="bg-gray-100 text-black rounded-lg p-3 max-w-[80%]">
               ${content}
             </div>
           `;

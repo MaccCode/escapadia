@@ -19,6 +19,17 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Application</a></li>
             <li class="breadcrumb-item active">Information            </li>
+             <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+          <div id="instruction-box-statistic" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+            The Status of your application is seen here.
+          </div>
+
+          <script>
+            function toggleInstruction() {
+              const box = document.getElementById("instruction-box-statistic");
+              box.style.display = box.style.display === "none" ? "block" : "none";
+            }
+          </script>
           </ul>
         </div>
         <section class="no-padding-top">

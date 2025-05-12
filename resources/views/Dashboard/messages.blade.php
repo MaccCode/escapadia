@@ -19,6 +19,17 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Message</a></li>
             <li class="breadcrumb-item active">Information            </li>
+            <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+            <div id="instruction-box-update" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+              Messages of costumers or potential costumers. (You can click on the email to respond)
+            </div>
+
+            <script>
+              function toggleInstruction() {
+                const box = document.getElementById("instruction-box-update");
+                box.style.display = box.style.display === "none" ? "block" : "none";
+              }
+            </script>
           </ul>
         </div>
         <section class="no-padding-top">
@@ -26,7 +37,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="block">
-                  <div class="title"><strong></strong></div>
+                  <div class="title"><strong>Property Inquiry Message</strong></div>
                   <div class="table-responsive"> 
                     <table class="table table-striped table-hover">
                       <thead class="text-uppercase text-center align-middle">  
@@ -40,21 +51,55 @@
                         </tr>
                       </thead>
                       <tbody class="text-center align-middle">
-                        @foreach ($data as $booking)
-                        @if ($booking->lister_id == Auth::user()->id)
-                            <tr>
-                                <td>{{ $booking->id}}</td>
-                                <td>{{ $booking->user_id }}</td>
-                                <td>{{ $booking->name}}</td>
-                                <td>{{ $booking->phone}}</td>
-                                <td>
-                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $booking->email }}" target="_blank" style="color: #7f8c8d;">
-                                        {{ $booking->email }}
-                                    </a>
-                                </td>
-                                <td>{{ $booking->message}}</td>
-                        @endif
-                        @endforeach
+                   @foreach ($messages as $data)
+                    <tr>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->user_id }}</td>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->phone }}</td>
+                        <td>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $data->email }}" target="_blank" style="color: #7f8c8d;">
+                                {{ $data->email }}
+                            </a>
+                        </td>
+                        <td>{{ $data->message }}</td>
+                    </tr>
+                    @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="block">
+                  <div class="title"><strong>Booked Messages</strong></div>
+                  <div class="table-responsive"> 
+                    <table class="table table-striped table-hover">
+                      <thead class="text-uppercase text-center align-middle">  
+                        <tr>
+                          <th>ID</th>
+                          <th>user-id</th>
+                          <th>Name</th>
+                          <th>phone</th>
+                          <th>email</th>
+                          <th>Message</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-center align-middle">
+                   @foreach ($bookings as $data)
+                    <tr>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->user_id }}</td>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->phone }}</td>
+                        <td>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $data->email }}" target="_blank" style="color: #7f8c8d;">
+                                {{ $data->email }}
+                            </a>
+                        </td>
+                        <td>{{ $data->message }}</td>
+                    </tr>
+                    @endforeach
                       </tbody>
                     </table>
                   </div>

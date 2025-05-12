@@ -13,6 +13,17 @@
       <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Booking</a></li>
         <li class="breadcrumb-item active">Information</li>
+        <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+          <div id="instruction-box-statistic" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+            You can see your bookings and it's status.
+          </div>
+
+          <script>
+            function toggleInstruction() {
+              const box = document.getElementById("instruction-box-statistic");
+              box.style.display = box.style.display === "none" ? "block" : "none";
+            }
+          </script>
       </ul>
     </div>
     <section class="no-padding-top">
@@ -61,11 +72,9 @@
                               <span class="badge bg-warning text-white fs-5 px-3 py-2">Pending</span>
                             @endif
                             </td>
-                            @if ($booking->status == 'pending' or 'rejected')
-                              <td><button class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Cancel</a></button></td>
-                            @else
-                              <td><button class="btn btn-danger" disabled>Cancel</a></button></td>                           
-                            @endif
+                            <td>
+                              <button class="btn-action btn btn-danger" {{ $booking->status == 'approved' ? 'disabled' : '' }} data-toggle="modal" data-target="#confirmDeleteModal">Cancel</a></button>                     
+                            </td>
                         </tr>
                     @endif
                     <!-- Confirm Delete Modal -->
@@ -81,8 +90,8 @@
                               <div class="modal-footer">
                                 <form id="deleteForm" method="Get" action="{{ url('cancel_booking', $booking->id) }}">
                                   @csrf
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                  <button type="submit" class="btn btn-primary">Yes, Delete</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Return</button>
+                                  <button type="submit" class="btn btn-primary">Yes, Cancel</button>
                                 </form>
                               </div>
                             </div>

@@ -33,6 +33,7 @@ route::post('/add_booking/{id}',[Home::class,'add_booking']);
 route::post('/approve_booking/{id}',[Home::class,'approve_booking']);
 route::post('/reject_booking/{id}',[Home::class,'reject_booking']);
 route::post('/payment/{id}',[Home::class,'payment']);
+route::post('/send_message/{id}',[Home::class,'message']);
 
 
 // Post routes Lister
@@ -53,7 +54,7 @@ Route::post('/add_image', [ListerController::class, 'add_image'])->name('add_ima
 // Get routes Lister
 route::get('/create_listing',[ListerController::class,'create_listing']);
 Route::get('/view_listing', [ListerController::class, 'view_listing'])->name('Dashboard.view_listing');
-route::get('/messages',[ListerController::class,'messages']);
+Route::get('/messages', [ListerController::class, 'messages'])->name('messages');
 Route::get('/listing_delete/{id}', [ListerController::class, 'listing_delete']);
 Route::get('/delete_booking/{id}', [ListerController::class, 'delete_booking']);
 Route::get('/cancel_booking/{id}', [ListerController::class, 'cancel_booking']);

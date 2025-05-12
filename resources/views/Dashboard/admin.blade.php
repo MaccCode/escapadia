@@ -13,7 +13,19 @@
 <div class="page-content">
 <div class="container-fluid">
   <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a style="color: #1E90FF;">Statistics</a></li>
+    <li class="breadcrumb-item"><a style="color: #1E90FF;">Statistics</a>
+        <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+    <div id="instruction-box-statistic" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+      Information about the Monthly Commission.
+    </div>
+
+    <script>
+      function toggleInstruction() {
+        const box = document.getElementById("instruction-box-statistic");
+        box.style.display = box.style.display === "none" ? "block" : "none";
+      }
+    </script>
+  </li>
   </ul>
 </div>
 
@@ -31,6 +43,17 @@
     <ul class="breadcrumb">
       <li class="breadcrumb-item"><a href="index.html">Application</a></li>
       <li class="breadcrumb-item active">Information</li>
+        <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructioneye()"></i>
+        <div id="instruction-box-approve" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+          Application of costumers to be a property lister. You can approved via button
+        </div>
+
+        <script>
+          function toggleInstructioneye() {
+            const box = document.getElementById("instruction-box-approve");
+            box.style.display = box.style.display === "none" ? "block" : "none";
+          }
+        </script>
     </ul>
   </div>
 

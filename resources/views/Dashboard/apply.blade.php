@@ -12,7 +12,19 @@
         <!-- Page Header-->
         <div class="page-header no-margin-bottom">
           <div class="container-fluid">
-            <h2 class="h5 no-margin-bottom">Application Form</h2>
+            <h2 class="h5 no-margin-bottom">Application Form
+              <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructionwow()"></i>
+          <div id="instruction-box-wow" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+            You can apply as lister here.
+          </div>
+
+          <script>
+            function toggleInstructionwow() {
+              const box = document.getElementById("instruction-box-wow");
+              box.style.display = box.style.display === "none" ? "block" : "none";
+            }
+          </script>
+            </h2>
           </div>
         </div>
         <!-- Breadcrumb-->
@@ -20,6 +32,17 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="" style="color: #4949FF;">Applicant</a></li>
             <li class="breadcrumb-item active">Informations</li>
+            <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+            <div id="instruction-box-statistic" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+              Fill out the form with the required information.
+            </div>
+
+            <script>
+              function toggleInstruction() {
+                const box = document.getElementById("instruction-box-statistic");
+                box.style.display = box.style.display === "none" ? "block" : "none";
+              }
+            </script>
           </ul>
         </div>
         <section class="no-padding-top">

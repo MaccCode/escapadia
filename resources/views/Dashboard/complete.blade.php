@@ -19,6 +19,17 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Booking</a></li>
             <li class="breadcrumb-item active">Information</li>
+            <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+            <div id="instruction-box-update" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+              Completed bookings are shown here as for traceability.
+            </div>
+
+            <script>
+              function toggleInstruction() {
+                const box = document.getElementById("instruction-box-update");
+                box.style.display = box.style.display === "none" ? "block" : "none";
+              }
+            </script>
           </ul>
         </div>
         <section class="no-padding-top">

@@ -12,6 +12,17 @@
       <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">User</a></li>
         <li class="breadcrumb-item active">Information</li>
+        <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructioneye()"></i>
+        <div id="instruction-box-approve" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+          Control the  privilege of users.
+        </div>
+
+        <script>
+          function toggleInstructioneye() {
+            const box = document.getElementById("instruction-box-approve");
+            box.style.display = box.style.display === "none" ? "block" : "none";
+          }
+        </script>
       </ul>
     </div>
     <section class="no-padding-top">

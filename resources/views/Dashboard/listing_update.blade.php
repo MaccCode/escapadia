@@ -30,7 +30,19 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="block">
-            <div class="title"><strong style="color: #1E90FF;">Edit All Informations</strong></div>
+            <div class="title"><strong style="color: #1E90FF;">Edit All Informations</strong>
+             <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+            <div id="instruction-box-update" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+              You can edit, add or remove infromations, rooms, additionals and etc.
+            </div>
+
+            <script>
+              function toggleInstruction() {
+                const box = document.getElementById("instruction-box-update");
+                box.style.display = box.style.display === "none" ? "block" : "none";
+              }
+            </script>
+          </div>
             <div class="block-body">
 
               <form class="form-horizontal" action="{{ url('listing_update_confirm', $listing->id) }}" method="POST" enctype="multipart/form-data">

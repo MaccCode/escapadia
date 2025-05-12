@@ -17,8 +17,20 @@
         <div class="container-fluid">
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a style="color: #1E90FF;">Statistics</a></li>
+             <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructionStats()"></i>
+              <!-- Hidden instruction box -->
+          <div id="instruction-box-statistic" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+            This section provides statistical insights about the application usage.
+          </div>
+
+          <script>
+            function toggleInstructionStats() {
+              const box = document.getElementById("instruction-box-statistic");
+              box.style.display = box.style.display === "none" ? "block" : "none";
+            }
+          </script>
+              </div>  
           </ul>
-        </div>
         <section class="no-padding-top">
         <div class="container-fluid">
             <div class="row">
@@ -42,6 +54,18 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Booking</a></li>
             <li class="breadcrumb-item active">Information</li>
+            <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstruction()"></i>
+              <!-- Hidden instruction box -->
+            <div id="instruction-box-bookinghome" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+              This section provides booking status of costumers.
+            </div>
+
+        <script>
+          function toggleInstruction() {
+            const box = document.getElementById("instruction-box-bookinghome");
+            box.style.display = box.style.display === "none" ? "block" : "none";
+          }
+        </script>
           </ul>
         </div>
         <section class="no-padding-top">

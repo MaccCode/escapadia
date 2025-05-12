@@ -19,6 +19,17 @@
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="" style="color: #1E90FF;">Property</a></li>
             <li class="breadcrumb-item active">Informations</li>
+            <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructionAdd()"></i>
+             <div id="instruction-box-statistic" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+            Complete all required fields with accurate property details, then click submit to list your property.
+          </div>
+
+          <script>
+            function toggleInstructionAdd() {
+              const box = document.getElementById("instruction-box-statistic");
+              box.style.display = box.style.display === "none" ? "block" : "none";
+            }
+          </script>
           </ul>
         </div>
         <section class="no-padding-top">
@@ -84,6 +95,17 @@
                       <div class="line"></div>
                         <div class="form-group">
                         <label class="form-control-label" style="color: #1E90FF;"><strong>Room Types</strong></label>
+                        <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructionroom()"></i>
+                          <div id="instruction-box-room" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+                          Select the room type you offer and upload an image.
+                        </div>
+
+                        <script>
+                          function toggleInstructionroom() {
+                            const box = document.getElementById("instruction-box-room");
+                            box.style.display = box.style.display === "none" ? "block" : "none";
+                          }
+                        </script>
 
                         <div class="row g-2 align-items-center mb-2">
                           <div class="col-md-3">
@@ -242,6 +264,17 @@
                    <div class="line"></div>
                     <div class="form-group">
                       <label class="form-control-label" style="color: #1E90FF;"><strong>Additionals</strong></label>
+                      <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructionroom()"></i>
+                          <div id="instruction-box-additionals" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+                          Select the Additional type you offer and upload an image (Amenity does not require photo).
+                        </div>
+
+                        <script>
+                          function toggleInstructionroom() {
+                            const box = document.getElementById("instruction-box-additionals");
+                            box.style.display = box.style.display === "none" ? "block" : "none";
+                          }
+                        </script>
 
                       <div class="row g-2 align-items-center mb-2">
                         <div class="col-md-3">
@@ -286,10 +319,12 @@
                   function togglePriceInput() {
                     const type = document.getElementById('additional_type').value;
                     const priceInput = document.getElementById('additional_price');
+                    const image = document.getElementById('additional_image');
 
                     if (type === 'Amenity') {
                       priceInput.value = '';
                       priceInput.disabled = true;
+                      image.disabled = true;
                     } else if (type === 'Service') {
                       priceInput.disabled = false;
                     }
@@ -409,7 +444,19 @@
                       </div>
                       <div class="line"></div>
                       <div class="form-group row">
-                        <label class="col-sm-6 form-control-label" style="color: #1E90FF;"><strong>Map Link</strong></label>
+                        <label class="col-sm-6 form-control-label"><strong style="color: #1E90FF;"></strongstyle>Map Link</strong>
+                         <i class="fas fa-question-circle" style="color: #1E90FF; cursor: pointer;" onclick="toggleInstructionmap()"></i>
+                         <div id="instruction-box-map" style="display:none; background-color:#f9f9f9; border:1px solid #ccc; padding:10px; border-radius:5px; width:250px; margin-top:5px;">
+                              provide Embedded for of map link.
+                            </div>
+
+                            <script>
+                              function toggleInstructionmap() {
+                                const box = document.getElementById("instruction-box-map");
+                                box.style.display = box.style.display === "none" ? "block" : "none";
+                              }
+                            </script>
+                      </label>
                         <div class="col-sm-12">
                           <input type="text" class="form-control" name="map_link" placeholder="Enter Google map link if available/Embedded Format">
                         </div>

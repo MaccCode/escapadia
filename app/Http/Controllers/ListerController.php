@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -356,9 +357,20 @@ class ListerController extends Controller
 
     public function messages()
     {   
-        $data = Booking::all();
-        $user_id = Auth::id();
-        return view('Dashboard.messages', compact('data', 'user_id'));
+        $user_id = Auth::id();  // Get the logged-in user ID (lister ID)
+
+        // Get messages for all properties owned by the logged-in user (lister_id)
+        $messages = DB::table('messages')
+            ->join('listings', 'messages.property_id', '=', 'listings.id')
+            ->where('listings.user_id', $user_id)  // Filter by lister_id
+            ->select('messages.*')  // Select only message fields
+            ->orderBy('messages.created_at', 'desc')  // Sort by creation date
+            ->get();
+
+        // Optionally, get bookings if needed
+        $bookings = Booking::where('lister_id', $user_id)->get();
+
+        return view('Dashboard.messages', compact('messages', 'bookings', 'user_id'));
     }
     public function checkin($id)
     {
@@ -442,7 +454,7 @@ class ListerController extends Controller
             $application->image = $imageName;
         }
         $application->save();
-        return redirect()->back()->with('success', 'Application submitted successfully');
+        return redirect()->back()->with('success', 'Application submitted successfully, An Email will be sent to you as notification of approval');
     }
 
     public function application_update()

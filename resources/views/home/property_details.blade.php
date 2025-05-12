@@ -170,16 +170,6 @@
     </div>
 </section>
 @endif
-
-      <!-- Description -->
-      @if (!empty($data->description))
-      <section class="mb-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Property Description</h2>
-        <p class="text-gray-700 leading-relaxed text-lg">
-          {{ $data->description }}
-        </p>
-      </section>
-      @endif
     </section>
     <!-- Description -->
     <section class="mb-12">
@@ -188,6 +178,24 @@
         {{ $data->description }}
       </p>
     </section>
+
+
+@if (auth()->check())
+    <form id="bookingForm{{ $data->id }}" method="POST" action="{{ url('send_message', $data->id) }}">
+      @csrf
+      <section class="message-section mb-12">
+        <div class="message-box">
+          <h2 class="text-2xl font-semibold mb-4 text-gray-900">Message Us</h2>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </section>
+    </form>
+@else
+    <h2 class="text-2xl font-semibold mb-4 text-gray-900">Message Us</h2>
+    <p>You need to <a href="{{ route('login') }}">log in</a> to send a message.</p>
+@endif
 
 
 <!-- Gallery Title -->
@@ -295,6 +303,51 @@ function closeLightbox() {
         </iframe>
       </div>
     </section>
+    <style>
+.message-section {
+  display: flex;
+  justify-content: center;
+}
+
+.message-box {
+  width: 100%;
+  max-width: 800px; /* adjust for preferred width */
+  margin: 20px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px; /* optional for spacing on smaller screens */
+}
+
+.message-box textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 14px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message-box button {
+  width: 100px;
+  padding: 8px;
+  background-color: #1E90FF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.message-box button:hover {
+  background-color: #187bcd;
+}
+
+</style>
+
+
     <div class="mt-6 flex justify-center">
       <button class="bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold px-8 py-4 rounded-full shadow-lg transition duration-300" data-bs-toggle="modal" data-bs-target="#bookingModal{{$data->id}}">
           Book Now

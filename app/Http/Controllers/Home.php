@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Listing;
 use App\Models\Booking;
-
 use Illuminate\Support\Facades\Auth;    
 
 class Home extends Controller
@@ -70,6 +70,21 @@ class Home extends Controller
     return redirect()->back()->with('success', 'Booking successfully submitted!');
 }
 
+public function message(Request $request, $id)
+{
+    $data = new Message;
+    $user = Auth::User();
+    $data->user_id = Auth::id();
+    $data->property_id = $id;
+    $data->name = $user->name;
+    $data->email = $user->email;
+    $data->phone = $user->phone;
+    $data->message = $request->message;
+
+    $data->save();
+
+    return redirect()->back()->with('success', 'Message successfully submitted!');
+}
     
     public function view_bookings()
     {
