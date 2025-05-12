@@ -64,6 +64,7 @@ class Home extends Controller
     $data->payable_amount = $payableAmount;
     $data->payment_method = $request->payment_method;
     $data->stay_status = 'pending';
+    $data->message = $request->message;
     $data->save();
 
     return redirect()->back()->with('success', 'Booking successfully submitted!');
