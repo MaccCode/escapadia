@@ -524,7 +524,7 @@ public function image_delete($id)
 {
     $data = Gallery::findOrFail($id);
     $data->delete();
-    return redirect()->back()->with('success', 'Listing deleted successfully');
+    return redirect()->back()->with('success', 'Image deleted successfully');
 }
 
 }
