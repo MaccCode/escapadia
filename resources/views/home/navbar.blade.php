@@ -1,0 +1,51 @@
+<!-- Navigation -->
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-umbrella-beach text-2xl text-blue-600 mr-2"></i>
+                        <span class="text-xl font-bold text-blue-600">Escapadia</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="{{ url('/') }}" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-blue-500 text-sm font-medium">Home</a>
+                    <a href="#display" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium">Explore</a>
+                    <a href="#about" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium">About</a>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center">
+                    @if (Route::has('login'))
+                <nav class="flex items-center justify-end gap-4">
+                    @auth
+                        <a
+                            href="{{ url('dashboard') }}"
+                            class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg border border-white hover:bg-blue-700 transition"
+                        >
+                            Dashboard
+                        </a>
+                    @else
+                        <a
+                            href="{{ route('login') }}"
+                            class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg border border-white hover:bg-blue-700 transition duration-300 ease-in-out"
+                        >
+                            Log in
+                        </a>
+                        @endauth
+                        </nav>
+                    @endif
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="hero-bg h-96 flex items-center justify-center text-white">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Your Perfect Getaway in Zambales</h1>
+            <p class="text-xl mb-8">Beachfront resorts, private villas, and nature retreats for your next escape</p>
+        </div>
+    </div>
