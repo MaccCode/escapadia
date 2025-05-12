@@ -11,13 +11,13 @@
         <!-- Page Header-->
         <div class="page-header no-margin-bottom">
           <div class="container-fluid">
-            <h2 class="h5 no-margin-bottom">View Listings</h2>
+            <h2 class="h5 no-margin-bottom">View Messages</h2>
           </div>
         </div>
         <!-- Breadcrumb-->
         <div class="container-fluid">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Listing</a></li>
+            <li class="breadcrumb-item"><a href="index.html">Message</a></li>
             <li class="breadcrumb-item active">Information            </li>
           </ul>
         </div>
@@ -26,7 +26,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="block">
-                  <div class="title"><strong>Property</strong></div>
+                  <div class="title"><strong></strong></div>
                   <div class="table-responsive"> 
                     <table class="table table-striped table-hover">
                       <thead class="text-uppercase text-center align-middle">  
@@ -47,28 +47,12 @@
                                 <td>{{ $booking->user_id }}</td>
                                 <td>{{ $booking->name}}</td>
                                 <td>{{ $booking->phone}}</td>
-                                <td>{{ $booking->email}}</td>
+                                <td>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $booking->email }}" target="_blank" style="color: #7f8c8d;">
+                                        {{ $booking->email }}
+                                    </a>
+                                </td>
                                 <td>{{ $booking->message}}</td>
-                        <!-- Confirm Delete Modal -->
-                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header bg-danger text-white">
-                                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
-                              </div>
-                              <div class="modal-body">
-                                Are you sure you want to delete this listing?
-                              </div>
-                              <div class="modal-footer">
-                                <form id="deleteForm" method="" action="">
-                                  @csrf
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                  <button type="submit" class="btn btn-danger"><a href="{{ url('listing_delete', $booking->id) }}">Yes, Delete</a></button>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
                         @endif
                         @endforeach
                       </tbody>

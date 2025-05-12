@@ -81,7 +81,20 @@ class ListerController extends Controller
             ->join('users', 'applications.user_id', '=', 'users.id')
             ->select('applications.*', 'users.usertype')
             ->get();
-            return view('Dashboard.admin', compact('user', 'application'));
+
+            $monthlyCommission = DB::table('completes')
+                ->selectRaw("MONTH(created_at) as month, SUM(commission_amount) as total")
+                ->groupBy(DB::raw("MONTH(created_at)"))
+                ->pluck('total', 'month')
+                ->toArray();
+
+            // Always complete 12 months
+            $salesData = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $salesData[] = $monthlyCommission[$i] ?? 0;
+            }
+            
+            return view('Dashboard.admin', compact('user', 'application', 'salesData'));
         }
     }
     
