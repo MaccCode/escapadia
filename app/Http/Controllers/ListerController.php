@@ -40,28 +40,55 @@ class ListerController extends Controller
         }
     
         if ($usertype === 'lister') {
-            // All bookings for reference (not used directly below?)
+
+            // All bookings for this lister
             $data = Booking::where('lister_id', Auth::id())->get();
-    
-            // ✅ Monthly Sales (from completes table)
+
+
+            // Monthly Sales (PostgreSQL)
             $monthlySales = DB::table('completes')
                 ->where('lister_id', Auth::id())
-                ->selectRaw("EXTRACT(MONTH FROM created_at) as month, SUM(payable_amount) as total")
-                ->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))
+                ->selectRaw("
+                    EXTRACT(MONTH FROM created_at) as month,
+                    SUM(payable_amount::numeric) as total
+                ")
+                ->groupByRaw("
+                    EXTRACT(MONTH FROM created_at)
+                ")
                 ->pluck('total', 'month')
                 ->toArray();
 
+
+
+            // Weekly Sales (PostgreSQL)
             $weeklySales = DB::table('completes')
                 ->where('lister_id', Auth::id())
-                ->selectRaw("EXTRACT(MONTH FROM created_at) as month, SUM(payable_amount) as total")
-                ->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))
-                ->pluck('total', 'month')
+                ->selectRaw("
+                    EXTRACT(WEEK FROM created_at) as week,
+                    SUM(payable_amount::numeric) as total
+                ")
+                ->groupByRaw("
+                    EXTRACT(WEEK FROM created_at)
+                ")
+                ->pluck('total', 'week')
                 ->toArray();
-    
+
+
+
+            // Always return 12 months for chart
             $salesData = [];
+
             for ($i = 1; $i <= 12; $i++) {
                 $salesData[] = $monthlySales[$i] ?? 0;
             }
+
+
+            return view('Dashboard.lister', compact(
+                'data',
+                'salesData',
+                'weeklySales'
+            ));
+        }
     
             // ✅ Bookings per Property (from completes table)
             $bookingsPerProperty = DB::table('completes')
