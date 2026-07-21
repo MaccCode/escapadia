@@ -14,20 +14,20 @@ return new class extends Migration
     Schema::create('completes', function (Blueprint $table) {
         $table->id();
 
-        $table->string('user_id')->nullable();
-        $table->string('lister_id')->nullable();
-        $table->string('property_id')->nullable();
+        $table->unsignedBigInteger('user_id')->nullable();
+        $table->unsignedBigInteger('lister_id')->nullable();
+        $table->unsignedBigInteger('property_id')->nullable();
 
         $table->string('name')->nullable();
         $table->string('phone')->nullable();
         $table->string('email')->nullable();
 
-        $table->string('start_date')->nullable();
-        $table->string('end_date')->nullable();
+        $table->date('start_date')->nullable();
+        $table->date('end_date')->nullable();
 
-        $table->string('price')->nullable();
-        $table->string('commission_amount')->nullable();
-        $table->string('payable_amount')->nullable();
+        $table->decimal('price', 10, 2)->nullable();
+        $table->decimal('commission_amount', 10, 2)->nullable();
+        $table->decimal('payable_amount', 10, 2)->nullable();
 
         $table->string('payment_status')->nullable();
         $table->string('status')->nullable();
