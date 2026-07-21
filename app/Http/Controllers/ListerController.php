@@ -46,15 +46,15 @@ class ListerController extends Controller
             // ✅ Monthly Sales (from completes table)
             $monthlySales = DB::table('completes')
                 ->where('lister_id', Auth::id())
-                ->selectRaw("MONTH(created_at) as month, SUM(payable_amount) as total")
-                ->groupBy(DB::raw("MONTH(created_at)"))
+                ->selectRaw("EXTRACT(MONTH FROM created_at) as month, SUM(payable_amount) as total")
+                ->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))
                 ->pluck('total', 'month')
                 ->toArray();
 
             $weeklySales = DB::table('completes')
                 ->where('lister_id', Auth::id())
-                ->selectRaw("MONTH(created_at) as month, SUM(payable_amount) as total")
-                ->groupBy(DB::raw("MONTH(created_at)"))
+                ->selectRaw("EXTRACT(MONTH FROM created_at) as month, SUM(payable_amount) as total")
+                ->groupBy(DB::raw("EXTRACT(MONTH FROM created_at)"))
                 ->pluck('total', 'month')
                 ->toArray();
     
