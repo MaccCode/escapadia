@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+
             $table->string('fullname');
             $table->string('age')->nullable();
             $table->string('gender')->nullable();
@@ -20,7 +23,10 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('current_address')->nullable();
             $table->string('permanent_address')->nullable();
-            $table->string('ID_image')->nullable();
+
+            $table->string('status')->default('pending');
+            $table->string('image')->nullable();
+
             $table->timestamps();
         });
     }
