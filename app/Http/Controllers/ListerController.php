@@ -88,19 +88,17 @@ class ListerController extends Controller
         'salesData',
         'weeklySales'
     ));
+    // ✅ Bookings per Property (from completes table)
+        $bookingsPerProperty = DB::table('completes')
+            ->join('listings', 'completes.property_id', '=', 'listings.id')
+            ->where('completes.status', 'completed')
+            ->where('completes.lister_id', Auth::id())
+            ->select('listings.title', DB::raw('COUNT(*) as total_bookings'))
+            ->groupBy('listings.title')
+            ->pluck('total_bookings', 'listings.title');
+
+        return view('Dashboard.lister', compact('data', 'salesData', 'weeklySales', 'bookingsPerProperty'));
 }
-    
-            // ✅ Bookings per Property (from completes table)
-            $bookingsPerProperty = DB::table('completes')
-                ->join('listings', 'completes.property_id', '=', 'listings.id')
-                ->where('completes.status', 'completed')
-                ->where('completes.lister_id', Auth::id())
-                ->select('listings.title', DB::raw('COUNT(*) as total_bookings'))
-                ->groupBy('listings.title')
-                ->pluck('total_bookings', 'listings.title');
-    
-            return view('Dashboard.lister', compact('data', 'salesData', 'weeklySales', 'bookingsPerProperty'));
-        }
     
         if ($usertype === 'admin') {
             $user = User::all();
