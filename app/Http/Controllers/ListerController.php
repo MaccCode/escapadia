@@ -39,56 +39,56 @@ class ListerController extends Controller
             return view('Dashboard.general', compact('data'));
         }
     
-        if ($usertype === 'lister') {
+   if ($usertype === 'lister') {
 
-            // All bookings for this lister
-            $data = Booking::where('lister_id', Auth::id())->get();
-
-
-            // Monthly Sales (PostgreSQL)
-            $monthlySales = DB::table('completes')
-                ->where('lister_id', Auth::id())
-                ->selectRaw("
-                    EXTRACT(MONTH FROM created_at) as month,
-                    SUM(payable_amount::numeric) as total
-                ")
-                ->groupByRaw("
-                    EXTRACT(MONTH FROM created_at)
-                ")
-                ->pluck('total', 'month')
-                ->toArray();
+    // All bookings for this lister
+    $data = Booking::where('lister_id', Auth::id())->get();
 
 
-
-            // Weekly Sales (PostgreSQL)
-            $weeklySales = DB::table('completes')
-                ->where('lister_id', Auth::id())
-                ->selectRaw("
-                    EXTRACT(WEEK FROM created_at) as week,
-                    SUM(payable_amount::numeric) as total
-                ")
-                ->groupByRaw("
-                    EXTRACT(WEEK FROM created_at)
-                ")
-                ->pluck('total', 'week')
-                ->toArray();
+    // Monthly Sales (PostgreSQL)
+    $monthlySales = DB::table('completes')
+        ->where('lister_id', Auth::id())
+        ->selectRaw("
+            EXTRACT(MONTH FROM created_at) as month,
+            SUM(payable_amount::numeric) as total
+        ")
+        ->groupByRaw("
+            EXTRACT(MONTH FROM created_at)
+        ")
+        ->pluck('total', 'month')
+        ->toArray();
 
 
 
-            // Always return 12 months for chart
-            $salesData = [];
+    // Weekly Sales (PostgreSQL)
+    $weeklySales = DB::table('completes')
+        ->where('lister_id', Auth::id())
+        ->selectRaw("
+            EXTRACT(WEEK FROM created_at) as week,
+            SUM(payable_amount::numeric) as total
+        ")
+        ->groupByRaw("
+            EXTRACT(WEEK FROM created_at)
+        ")
+        ->pluck('total', 'week')
+        ->toArray();
 
-            for ($i = 1; $i <= 12; $i++) {
-                $salesData[] = $monthlySales[$i] ?? 0;
-            }
 
 
-            return view('Dashboard.lister', compact(
-                'data',
-                'salesData',
-                'weeklySales'
-            ));
-        }
+    // Always return 12 months for chart
+    $salesData = [];
+
+    for ($i = 1; $i <= 12; $i++) {
+        $salesData[] = $monthlySales[$i] ?? 0;
+    }
+
+
+    return view('Dashboard.lister', compact(
+        'data',
+        'salesData',
+        'weeklySales'
+    ));
+}
     
             // ✅ Bookings per Property (from completes table)
             $bookingsPerProperty = DB::table('completes')
