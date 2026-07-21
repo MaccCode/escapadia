@@ -11,22 +11,39 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('listings', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id') -> nullable();
-            $table->string('title') -> nullable();
-            $table->string('address') -> nullable();
-            $table->string('image') -> nullable();
-            $table->string('initial_price') -> nullable();
-            $table->string('current_price') -> nullable();
-            $table->string('guest_minimun') -> nullable();
-            $table->string('guest_max') -> nullable();
-            $table->string('bedroom_count') -> nullable();
-            $table->string('bathroom_count') -> nullable();
-            $table->string('additionals') -> nullable();
-            $table->timestamps();
+    Schema::create('listings', function (Blueprint $table) {
+        $table->id();
 
-        });
+        $table->unsignedBigInteger('user_id')->nullable();
+
+        $table->string('title')->nullable();
+        $table->string('property_type')->nullable();
+
+        $table->text('address')->nullable();
+        $table->text('description')->nullable();
+        $table->text('map_link')->nullable();
+
+        $table->string('image')->nullable();
+
+        $table->decimal('initial_price', 10, 2)->nullable();
+        $table->decimal('current_price', 10, 2)->nullable();
+
+        $table->integer('guest_minimum')->nullable();
+        $table->integer('guest_max')->nullable();
+
+        $table->integer('bedroom_count')->nullable();
+        $table->integer('bathroom_count')->nullable();
+
+        $table->json('rooms')->nullable();
+        $table->decimal('room_total_price', 10, 2)->nullable();
+
+        $table->json('additionals')->nullable();
+
+        $table->decimal('commission_amount', 10, 2)->nullable();
+        $table->decimal('payable_amount', 10, 2)->nullable();
+
+        $table->timestamps();
+    });
     }
 
     /**
