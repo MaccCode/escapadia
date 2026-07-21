@@ -39,13 +39,13 @@ class ListerController extends Controller
             return view('Dashboard.general', compact('data'));
         }
     
-   if ($usertype === 'lister') {
+ if ($usertype === 'lister') {
 
     // All bookings for this lister
     $data = Booking::where('lister_id', Auth::id())->get();
 
 
-    // Monthly Sales (PostgreSQL)
+    // Monthly Sales
     $monthlySales = DB::table('completes')
         ->where('lister_id', Auth::id())
         ->selectRaw("
@@ -59,8 +59,7 @@ class ListerController extends Controller
         ->toArray();
 
 
-
-    // Weekly Sales (PostgreSQL)
+    // Weekly Sales
     $weeklySales = DB::table('completes')
         ->where('lister_id', Auth::id())
         ->selectRaw("
@@ -75,7 +74,7 @@ class ListerController extends Controller
 
 
 
-    // Always return 12 months for chart
+    // Monthly chart data
     $salesData = [];
 
     for ($i = 1; $i <= 12; $i++) {
@@ -83,21 +82,27 @@ class ListerController extends Controller
     }
 
 
+
+    // Bookings per Property
+    $bookingsPerProperty = DB::table('completes')
+        ->join('listings', 'completes.property_id', '=', 'listings.id')
+        ->where('completes.status', 'completed')
+        ->where('completes.lister_id', Auth::id())
+        ->select(
+            'listings.title',
+            DB::raw('COUNT(*) as total_bookings')
+        )
+        ->groupBy('listings.title')
+        ->pluck('total_bookings', 'listings.title');
+
+
+
     return view('Dashboard.lister', compact(
         'data',
         'salesData',
-        'weeklySales'
+        'weeklySales',
+        'bookingsPerProperty'
     ));
-    // ✅ Bookings per Property (from completes table)
-        $bookingsPerProperty = DB::table('completes')
-            ->join('listings', 'completes.property_id', '=', 'listings.id')
-            ->where('completes.status', 'completed')
-            ->where('completes.lister_id', Auth::id())
-            ->select('listings.title', DB::raw('COUNT(*) as total_bookings'))
-            ->groupBy('listings.title')
-            ->pluck('total_bookings', 'listings.title');
-
-        return view('Dashboard.lister', compact('data', 'salesData', 'weeklySales', 'bookingsPerProperty'));
 }
     
         if ($usertype === 'admin') {
